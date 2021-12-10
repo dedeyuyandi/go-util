@@ -7,6 +7,8 @@ import (
 	"github.com/google/uuid"
 )
 
+// this is fucntion for dinamic filter for query where
+// for eg return : WHERE "city" = "indonesia" AND "country": "bandung"
 func Where(request map[string]interface{}) string {
 	var w []string
 	for k, v := range request {
@@ -20,7 +22,7 @@ func Where(request map[string]interface{}) string {
 		}
 	}
 	if len(w) > 0 {
-		return strings.Join(w, " AND ")
+		return fmt.Sprintf("WHERE %s", strings.Join(w, " AND "))
 	}
 	return ""
 }
